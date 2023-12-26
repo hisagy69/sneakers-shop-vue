@@ -15,7 +15,11 @@
         </my-input>
       </div>
     </div>
-    <card-list :cards="cards" @addToFavorite="addToFavorite" />
+    <card-list
+      :cards="cards"
+      @addToFavorite="addToFavorite"
+      @toggleItemCart="toggleItemCart"
+    />
   </div>
 </template>
 
@@ -35,6 +39,7 @@ const filters = reactive({
   sortBy: "",
   searchQuery: "",
 });
+const cartItems = ref([]);
 
 const cardsFetch = async () => {
   try {
@@ -103,6 +108,20 @@ const addToFavorite = async (item) => {
   }
 };
 
+const toggleDrawer = () => {
+  drawerVisible.value = !drawerVisible.value;
+};
+
+const toggleItemCart = (item) => {
+  if (item.isAdded) {
+    cartItems.value.filter((cartItem) => cartItem.id !== item.id);
+    item.isAdded = false;
+  } else {
+    cartItems.value.push(item);
+    item.isAdded = true;
+  }
+};
+
 watch(filters, cardsFetch);
 
 onMounted(async () => {
@@ -110,7 +129,5 @@ onMounted(async () => {
   await fetchFavorites();
 });
 
-provide("toggleDrawer", () => {
-  drawerVisible.value = !drawerVisible.value;
-});
+provide("toggleDrawer", toggleDrawer);
 </script>

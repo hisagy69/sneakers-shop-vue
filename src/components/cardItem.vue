@@ -12,7 +12,7 @@
         <span class="text-slate-300 text-sm uppercase">Цена:</span>
         <b class="text-sm">{{ price }} руб.</b>
       </div>
-      <button class="card__button">
+      <button class="card__button" @click="onClickCart">
         <img :src="isAdded ? '/checked.svg' : '/plus.svg'" alt="plus" />
       </button>
     </div>
@@ -31,5 +31,6 @@ defineProps({
   },
   isAdded: Boolean,
   onClickFavorite: Function,
+  onClickCart: Function,
 });
 </script>
