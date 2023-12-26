@@ -5,8 +5,12 @@
     <div class="card__bookmark absolute left-7 top-7" @click="onClickFavorite">
       <img :src="isFavorite ? '/like-2.svg' : '/like-1.svg'" alt="like" />
     </div>
-    <img :src="imageUrl" alt="sneakers" />
-    <p class="card__title mt-3.5 mb-3.5 text-sm">{{ title }}</p>
+    <div
+      class="w-32 h-28 overflow-hidden d-flex align-center justify-center mx-auto"
+    >
+      <img :src="imageUrl" alt="sneakers" />
+    </div>
+    <p class="card__title min-h-10 mt-3.5 mb-3.5 text-sm">{{ title }}</p>
     <div class="flex align-center justify-between">
       <div class="card__price flex flex-col">
         <span class="text-slate-300 text-sm uppercase">Цена:</span>
