@@ -36,7 +36,7 @@
         <div class="flex-1 h-px border-b border-dashed self-end"></div>
         <b class="whitespace-nowrap">{{ totalVat }} руб.</b>
       </div>
-      <my-button @click="createOrder">
+      <my-button @click="createOrder" :disabled="!totalPrice">
         <span
           >Оформить заказ<img
             src="/arrow-next.svg"

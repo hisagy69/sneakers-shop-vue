@@ -115,10 +115,15 @@ const createOrder = async () => {
       delete item.favoriteId;
       delete item.isAdded;
     });
-    await axios.post("https://4384da2c13f50563.mokky.dev/orders", {
-      items: cartItems.value,
-    });
+    const { data } = await axios.post(
+      "https://4384da2c13f50563.mokky.dev/orders",
+      {
+        items: cartItems.value,
+        totalPrice: totalPrice.value,
+      }
+    );
     cartItems.value = [];
+    return data;
   } catch (e) {
     console.error(e.message);
   }
