@@ -11,5 +11,5 @@
 import { inject } from "vue";
 import drawerCart from "@/components/drawerCart.vue";
 
-const toggleDrawer = inject("toggleDrawer");
+const { toggleDrawer } = inject("cart");
 </script>

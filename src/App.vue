@@ -137,6 +137,5 @@ onMounted(async () => {
   await fetchFavorites();
 });
 
-provide("toggleDrawer", toggleDrawer);
-provide("cart", { cartItems, toggleItemCart, totalPrice });
+provide("cart", { toggleDrawer, cartItems, toggleItemCart, totalPrice });
 </script>

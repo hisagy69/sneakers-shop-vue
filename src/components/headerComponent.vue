@@ -43,5 +43,5 @@ import { inject } from "vue";
 defineProps({
   totalPrice: Number,
 });
-const toggleDrawer = inject("toggleDrawer");
+const { toggleDrawer } = inject("cart");
 </script>

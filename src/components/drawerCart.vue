@@ -56,6 +56,6 @@ const totalVat = computed(() => {
   return totalPrice.value * 0.05;
 });
 
-const toggleDrawer = inject("toggleDrawer");
+const { toggleDrawer } = inject("cart");
 const { cartItems, toggleItemCart, totalPrice } = inject("cart");
 </script>
