@@ -15,7 +15,10 @@
         class="nav__item text-slate-400 hover:text-slate-600 transition-all flex items-center"
         @click="toggleDrawer"
       >
-        <img src="/cart.svg" alt="cart" class="inline-block mr-2" />1205 руб.
+        <img src="/cart.svg" alt="cart" class="inline-block mr-2" />{{
+          totalPrice
+        }}
+        руб.
       </a>
       <a
         href="#"
@@ -36,5 +39,9 @@
 </template>
 <script setup>
 import { inject } from "vue";
+
+defineProps({
+  totalPrice: Number,
+});
 const toggleDrawer = inject("toggleDrawer");
 </script>

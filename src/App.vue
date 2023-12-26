@@ -1,7 +1,7 @@
 <template>
   <drawer-component v-if="drawerVisible" />
   <div class="w-4/5 mx-auto bg-white rounded-2xl shadow-xl mt-14">
-    <header-component />
+    <header-component :totalPrice="totalPrice" />
     <div class="flex justify-between align-center items-center px-11 mb-9">
       <h2 class="text-3xl font-bold">Все кроссовки</h2>
       <div class="flex">
@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, reactive, provide } from "vue";
+import { ref, onMounted, watch, reactive, provide, computed } from "vue";
 import axios from "axios";
 
 import headerComponent from "@/components/headerComponent";
@@ -114,13 +114,21 @@ const toggleDrawer = () => {
 
 const toggleItemCart = (item) => {
   if (item.isAdded) {
-    cartItems.value.filter((cartItem) => cartItem.id !== item.id);
+    cartItems.value = cartItems.value.filter(
+      (cartItem) => cartItem.id !== item.id
+    );
     item.isAdded = false;
   } else {
     cartItems.value.push(item);
     item.isAdded = true;
   }
 };
+
+const totalPrice = computed(() => {
+  return cartItems.value.reduce((sum, item) => {
+    return sum + item.price;
+  }, 0);
+});
 
 watch(filters, cardsFetch);
 
@@ -130,4 +138,5 @@ onMounted(async () => {
 });
 
 provide("toggleDrawer", toggleDrawer);
+provide("cart", { cartItems, toggleItemCart, totalPrice });
 </script>

@@ -15,14 +15,12 @@
         <h3 class="drawer__heading text-2xl mb-7">Корзина</h3>
       </div>
       <cart-item
-        imageUrl="/sneakers/sneakers-1.jpg"
-        title="Мужские Кроссовки Nike Air Max 270"
-        :price="12999"
-      />
-      <cart-item
-        imageUrl="/sneakers/sneakers-2.jpg"
-        title="Мужские Кроссовки Nike Air Max 270"
-        :price="12999"
+        v-for="item in cartItems"
+        :imageUrl="item.imageUrl"
+        :key="item.id"
+        :title="item.title"
+        :price="item.price"
+        @toggleItemCart="() => toggleItemCart(item)"
       />
     </div>
     <div>
@@ -31,12 +29,12 @@
       >
         <span>Итого:</span>
         <div class="flex-1 h-px border-b border-dashed self-end"></div>
-        <b class="whitespace-nowrap">21 498 руб.</b>
+        <b class="whitespace-nowrap">{{ totalPrice }} руб.</b>
       </div>
       <div class="drawer__vat text-base mb-6 flex justify-between gap-x-2">
         <span class="whitespace-nowrap">Налог 5%:</span>
         <div class="flex-1 h-px border-b border-dashed self-end"></div>
-        <b class="whitespace-nowrap">1074 руб.</b>
+        <b class="whitespace-nowrap">{{ totalVat }} руб.</b>
       </div>
       <my-button>
         <span
@@ -51,8 +49,13 @@
 </template>
 
 <script setup>
-import { inject } from "vue";
+import { inject, computed } from "vue";
 import cartItem from "@/components/cartItem";
 
+const totalVat = computed(() => {
+  return totalPrice.value * 0.05;
+});
+
 const toggleDrawer = inject("toggleDrawer");
+const { cartItems, toggleItemCart, totalPrice } = inject("cart");
 </script>

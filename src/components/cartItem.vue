@@ -7,6 +7,7 @@
     </div>
     <button
       class="cart-item__button h-fit self-end hover:opacity-40 transition"
+      @click="() => emit('toggleItemCart')"
     >
       <img src="/close.svg" alt="delete" />
     </button>
@@ -19,4 +20,6 @@ defineProps({
   title: String,
   price: Number,
 });
+
+const emit = defineEmits(["toggleItemCart"]);
 </script>
