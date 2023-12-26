@@ -108,6 +108,22 @@ const addToFavorite = async (item) => {
   }
 };
 
+const createOrder = async () => {
+  try {
+    cartItems.value.forEach((item) => {
+      delete item.isFavorite;
+      delete item.favoriteId;
+      delete item.isAdded;
+    });
+    await axios.post("https://4384da2c13f50563.mokky.dev/orders", {
+      items: cartItems.value,
+    });
+    cartItems.value = [];
+  } catch (e) {
+    console.error(e.message);
+  }
+};
+
 const toggleDrawer = () => {
   drawerVisible.value = !drawerVisible.value;
 };
@@ -138,4 +154,5 @@ onMounted(async () => {
 });
 
 provide("cart", { toggleDrawer, cartItems, toggleItemCart, totalPrice });
+provide("order", { createOrder });
 </script>

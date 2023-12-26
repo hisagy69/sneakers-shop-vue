@@ -36,7 +36,7 @@
         <div class="flex-1 h-px border-b border-dashed self-end"></div>
         <b class="whitespace-nowrap">{{ totalVat }} руб.</b>
       </div>
-      <my-button>
+      <my-button @click="createOrder">
         <span
           >Оформить заказ<img
             src="/arrow-next.svg"
@@ -53,9 +53,10 @@ import { inject, computed } from "vue";
 import cartItem from "@/components/cartItem";
 
 const totalVat = computed(() => {
-  return totalPrice.value * 0.05;
+  return Math.round(totalPrice.value * 0.05);
 });
 
 const { toggleDrawer } = inject("cart");
 const { cartItems, toggleItemCart, totalPrice } = inject("cart");
+const { createOrder } = inject("order");
 </script>
