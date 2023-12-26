@@ -1,7 +1,7 @@
 <template>
-  <drawer-component v-if="drawerVisible" @removeDrawer="toggleDrawer" />
+  <drawer-component v-if="drawerVisible" />
   <div class="w-4/5 mx-auto bg-white rounded-2xl shadow-xl mt-14">
-    <header-component @addDrower="toggleDrawer" />
+    <header-component />
     <div class="flex justify-between align-center items-center px-11 mb-9">
       <h2 class="text-3xl font-bold">Все кроссовки</h2>
       <div class="flex">
@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch, reactive } from "vue";
+import { ref, onMounted, watch, reactive, provide } from "vue";
 import axios from "axios";
 
 import headerComponent from "@/components/headerComponent";
@@ -29,10 +29,6 @@ import { sortOptions } from "@/const";
 import drawerComponent from "@/components/drawerComponent.vue";
 
 const drawerVisible = ref(false);
-
-const toggleDrawer = () => {
-  drawerVisible.value = !drawerVisible.value;
-};
 
 const cards = ref([]);
 const filters = reactive({
@@ -112,5 +108,9 @@ watch(filters, cardsFetch);
 onMounted(async () => {
   await cardsFetch();
   await fetchFavorites();
+});
+
+provide("toggleDrawer", () => {
+  drawerVisible.value = !drawerVisible.value;
 });
 </script>

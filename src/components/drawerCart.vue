@@ -5,7 +5,7 @@
   >
     <div>
       <div class="flex align-center">
-        <button class="h-fit mr-5" @click="$emit('removeDrawer')">
+        <button class="h-fit mr-5" @click="toggleDrawer">
           <img
             src="/arrow-left.svg"
             class="hover:opacity-40 transition"
@@ -51,5 +51,8 @@
 </template>
 
 <script setup>
+import { inject } from "vue";
 import cartItem from "@/components/cartItem";
+
+const toggleDrawer = inject("toggleDrawer");
 </script>

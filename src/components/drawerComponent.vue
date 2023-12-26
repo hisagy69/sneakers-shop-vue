@@ -1,12 +1,15 @@
 <template>
   <div
     class="drawer w-screen h-screen fixed left-0 top-0 bg-black/70 z-10"
-    @click.stop="$emit('removeDrawer')"
+    @click.stop="toggleDrawer"
   >
-    <drawer-cart @removeDrawer="$emit('removeDrawer')" />
+    <drawer-cart />
   </div>
 </template>
 
 <script setup>
+import { inject } from "vue";
 import drawerCart from "@/components/drawerCart.vue";
+
+const toggleDrawer = inject("toggleDrawer");
 </script>

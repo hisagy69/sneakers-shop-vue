@@ -13,7 +13,7 @@
       <a
         href="#"
         class="nav__item text-slate-400 hover:text-slate-600 transition-all flex items-center"
-        @click="onClickCart"
+        @click="toggleDrawer"
       >
         <img src="/cart.svg" alt="cart" class="inline-block mr-2" />1205 руб.
       </a>
@@ -35,8 +35,6 @@
   </header>
 </template>
 <script setup>
-const emit = defineEmits(["addDrower"]);
-const onClickCart = () => {
-  emit("addDrower");
-};
+import { inject } from "vue";
+const toggleDrawer = inject("toggleDrawer");
 </script>
