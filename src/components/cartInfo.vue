@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-80">
+  <div class="h-full flex flex-col justify-center">
     <img :src="imageUrl" alt="package" class="w-28 h-28 mx-auto mb-5" />
     <h3 class="text-xl text-center font-semibold mb-2.5">{{ title }}</h3>
     <p class="text-base text-center max-w-72 text-slate-400 mb-10">

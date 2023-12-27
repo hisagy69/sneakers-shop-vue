@@ -3,7 +3,7 @@
     class="drawer__cart absolute right-0 top-0 h-full bg-white p-7 flex flex-col justify-between"
     @click.stop
   >
-    <div>
+    <div class="h-full">
       <div class="flex align-center">
         <button class="h-fit mr-5" @click="toggleDrawer">
           <img
