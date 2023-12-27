@@ -24,7 +24,18 @@
           @toggleItemCart="() => toggleItemCart(item)"
         />
       </div>
-      <cart-empty v-else />
+      <cart-info
+        v-else-if="order.id"
+        title="Заказ оформлен!"
+        :text="`Ваш заказ #${order.id} скоро будет передан курьерской доставке`"
+        imageUrl="/order-success-icon.png"
+      />
+      <cart-info
+        v-else
+        title="Корзина пустая"
+        text="Добавьте хотя бы одну пару кроссовок, чтобы сделать заказ."
+        imageUrl="/package-icon.png"
+      />
     </div>
     <cart-create v-if="totalPrice" />
   </div>
@@ -34,8 +45,8 @@
 import { inject } from "vue";
 import cartItem from "@/components/cartItem";
 import cartCreate from "@/components/cartCreate";
-import cartEmpty from "@/components/cartEmpty";
+import cartInfo from "@/components/cartInfo";
 
-const { toggleDrawer } = inject("cart");
-const { cartItems, toggleItemCart, totalPrice } = inject("cart");
+const { cartItems, toggleItemCart, totalPrice, toggleDrawer } = inject("cart");
+const { order } = inject("order");
 </script>

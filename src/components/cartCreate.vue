@@ -12,7 +12,7 @@
       <div class="flex-1 h-px border-b border-dashed self-end"></div>
       <b class="whitespace-nowrap">{{ totalVat }} руб.</b>
     </div>
-    <my-button @click="createOrder" :disabled="!totalPrice">
+    <my-button @click="createOrder" :disabled="buttonDisabled">
       <span class="flex align-center justify-center">
         Оформить заказ
         <img src="/arrow-next.svg" class="ml-10" alt="next" />
@@ -24,10 +24,14 @@
 <script setup>
 import { inject, computed } from "vue";
 
+const buttonDisabled = computed(
+  () => isCreatingOrder.value || !totalPrice.value
+);
+
 const totalVat = computed(() => {
   return Math.round(totalPrice.value * 0.05);
 });
 
 const { totalPrice } = inject("cart");
-const { createOrder } = inject("order");
+const { createOrder, isCreatingOrder } = inject("order");
 </script>

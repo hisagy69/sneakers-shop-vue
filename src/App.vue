@@ -40,6 +40,8 @@ const filters = reactive({
   searchQuery: "",
 });
 const cartItems = ref([]);
+const isCreatingOrder = ref(false);
+const order = ref({});
 
 const cardsFetch = async () => {
   try {
@@ -110,11 +112,9 @@ const addToFavorite = async (item) => {
 
 const createOrder = async () => {
   try {
-    cartItems.value.forEach((item) => {
-      delete item.isFavorite;
-      delete item.favoriteId;
-      delete item.isAdded;
-    });
+    isCreatingOrder.value = true;
+    order.value = {};
+
     const { data } = await axios.post(
       "https://4384da2c13f50563.mokky.dev/orders",
       {
@@ -123,9 +123,11 @@ const createOrder = async () => {
       }
     );
     cartItems.value = [];
-    return data;
+    order.value = data;
   } catch (e) {
     console.error(e.message);
+  } finally {
+    isCreatingOrder.value = false;
   }
 };
 
@@ -152,6 +154,11 @@ const totalPrice = computed(() => {
 });
 
 watch(filters, cardsFetch);
+watch(cartItems, () => {
+  cards.value = cards.value.map((card) => {
+    return { ...card, isAdded: false };
+  });
+});
 
 onMounted(async () => {
   await cardsFetch();
@@ -159,5 +166,5 @@ onMounted(async () => {
 });
 
 provide("cart", { toggleDrawer, cartItems, toggleItemCart, totalPrice });
-provide("order", { createOrder });
+provide("order", { createOrder, isCreatingOrder, order });
 </script>
