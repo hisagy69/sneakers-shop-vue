@@ -14,7 +14,7 @@
         </button>
         <h3 class="drawer__heading text-2xl mb-7">Корзина</h3>
       </div>
-      <div v-if="totalPrice">
+      <div v-if="totalPrice" v-auto-animate>
         <cart-item
           v-for="item in cartItems"
           :imageUrl="item.imageUrl"
