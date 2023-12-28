@@ -43,9 +43,9 @@
 
 <script setup>
 import { inject } from "vue";
-import cartItem from "@/components/cartItem";
-import cartCreate from "@/components/cartCreate";
-import cartInfo from "@/components/cartInfo";
+import CartItem from "@/components/CartItem";
+import CartCreate from "@/components/CartCreate";
+import CartInfo from "@/components/CartInfo";
 
 const { cartItems, toggleItemCart, totalPrice, toggleDrawer } = inject("cart");
 const { order } = inject("order");

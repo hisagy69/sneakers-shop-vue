@@ -21,7 +21,7 @@
 </template>
 
 <script setup>
-import cardItem from "@/components/cardItem";
+import CardItem from "@/components/CardItem";
 
 defineProps({
   cards: Array,

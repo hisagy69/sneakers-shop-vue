@@ -27,10 +27,10 @@
 import { ref, onMounted, watch, reactive, provide, computed } from "vue";
 import axios from "axios";
 
-import headerComponent from "@/components/headerComponent";
-import cardList from "@/components/cardList";
+import HeaderComponent from "@/components/HeaderComponent";
+import CardList from "@/components/CardList";
 import { sortOptions } from "@/const";
-import drawerComponent from "@/components/drawerComponent.vue";
+import DrawerComponent from "@/components/DrawerComponent";
 
 const drawerVisible = ref(false);
 

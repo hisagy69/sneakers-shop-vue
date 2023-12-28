@@ -9,7 +9,7 @@
 
 <script setup>
 import { inject } from "vue";
-import drawerCart from "@/components/drawerCart.vue";
+import DrawerCart from "@/components/DrawerCart";
 
 const { toggleDrawer } = inject("cart");
 </script>
