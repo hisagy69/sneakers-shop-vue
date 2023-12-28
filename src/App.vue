@@ -156,13 +156,30 @@ const totalPrice = computed(() => {
 watch(filters, cardsFetch);
 watch(cartItems, () => {
   cards.value = cards.value.map((card) => {
-    return { ...card, isAdded: false };
+    return {
+      ...card,
+      isAdded: cartItems.value.some((item) => item.id === card.id),
+    };
   });
 });
+watch(
+  cartItems,
+  () => localStorage.setItem("cart", JSON.stringify(cartItems.value)),
+  { deep: true }
+);
 
 onMounted(async () => {
+  cartItems.value = JSON.parse(localStorage.getItem("cart")) || [];
+
   await cardsFetch();
   await fetchFavorites();
+
+  cards.value = cards.value.map((card) => {
+    return {
+      ...card,
+      isAdded: cartItems.value.some((item) => item.id === card.id),
+    };
+  });
 });
 
 provide("cart", { toggleDrawer, cartItems, toggleItemCart, totalPrice });
