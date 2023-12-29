@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between align-center items-center mb-9">
+  <div class="flex justify-between align-center items-center mb-8">
     <my-title>Все кросовки</my-title>
     <div class="flex">
       <my-select v-model="filters.sortBy" :sortOptions="sortOptions" />
@@ -14,7 +14,7 @@
   </div>
   <card-list
     :cards="cards"
-    @addToFavorite="addToFavorite"
+    @toggleFavorite="toggleFavorite"
     @toggleItemCart="toggleItemCart"
   />
 </template>
@@ -60,7 +60,7 @@ const fetchFavorites = async () => {
     );
     cards.value = cards.value.map((card) => {
       const favorite = favorites.find(
-        (favorite) => favorite.parentId === card.id
+        (favorite) => favorite.product_id === card.id
       );
 
       if (!favorite) {
@@ -78,14 +78,14 @@ const fetchFavorites = async () => {
   }
 };
 
-const addToFavorite = async (item) => {
+const toggleFavorite = async (item) => {
   try {
     if (!item.isFavorite) {
       item.isFavorite = true;
       const { data } = await axios.post(
         "https://4384da2c13f50563.mokky.dev/favorites",
         {
-          parentId: item.id,
+          product_id: item.id,
         }
       );
       item.favoriteId = data.id;
