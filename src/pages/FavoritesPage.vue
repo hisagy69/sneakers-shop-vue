@@ -1,14 +1,21 @@
 <template>
-  <div class="flex align-center mb-8">
-    <router-link to="/" class="mr-5">
-      <img src="/left.svg" alt="back" />
-    </router-link>
-    <my-title>Мои закладки</my-title>
+  <div v-if="favorites.length">
+    <div class="flex align-center mb-8">
+      <router-link to="/" class="mr-5">
+        <img src="/left.svg" alt="back" />
+      </router-link>
+      <my-title>Мои закладки</my-title>
+    </div>
+    <card-list
+      :cards="favorites"
+      @toggleFavorite="deleteFavorite"
+      @toggleItemCart="toggleItemCart"
+    />
   </div>
-  <card-list
-    :cards="favorites"
-    @toggleFavorite="deleteFavorite"
-    @toggleItemCart="toggleItemCart"
+  <info-component
+    imageUrl="/emoji-1.png"
+    title="Закладок нет :("
+    text="Вы ничего не добавляли в закладки"
   />
 </template>
 
@@ -17,6 +24,7 @@ import axios from "axios";
 import { ref, onMounted, inject, watch } from "vue";
 
 import CardList from "@/components/CardList";
+import InfoComponent from "@/components/InfoComponent";
 
 const { toggleItemCart, cartItems } = inject("cart");
 
