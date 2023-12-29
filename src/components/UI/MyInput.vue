@@ -4,7 +4,6 @@
     <input
       type="text"
       class="border rounded-2xl p-4 pl-11"
-      :value="modelValue"
       @input="updateInput"
       :placeholder="placeholder"
     />
@@ -15,12 +14,11 @@
 export default {
   name: "my-input",
   props: {
-    modelValue: String,
     placeholder: String,
   },
   methods: {
     updateInput(e) {
-      this.$emit("update:modelValue", e.target.value);
+      this.$emit("input", e.target.value);
     },
   },
 };

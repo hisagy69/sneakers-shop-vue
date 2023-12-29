@@ -4,7 +4,7 @@
     <div class="flex">
       <my-select v-model="filters.sortBy" :sortOptions="sortOptions" />
       <my-input
-        v-model="filters.searchQuery"
+        @input="onChangeSearchInput"
         placeholder="Поиск..."
         class="card-list__search"
       >
@@ -22,6 +22,7 @@
 <script setup>
 import axios from "axios";
 import { ref, reactive, watch, onMounted, inject } from "vue";
+import debounce from "lodash.debounce";
 
 import CardList from "@/components/CardList";
 import { sortOptions } from "@/const";
@@ -33,6 +34,10 @@ const filters = reactive({
 });
 
 const { cartItems, toggleItemCart } = inject("cart");
+
+const onChangeSearchInput = debounce((e) => {
+  filters.searchQuery = e.target.value;
+}, 300);
 
 const cardsFetch = async () => {
   try {
