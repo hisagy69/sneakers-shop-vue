@@ -47,6 +47,7 @@ import CartItem from "@/components/CartItem";
 import CartCreate from "@/components/CartCreate";
 import CartInfo from "@/components/CartInfo";
 
-const { cartItems, toggleItemCart, totalPrice, toggleDrawer } = inject("cart");
+const { cartItems, totalPrice, toggleDrawer } = inject("cart");
+const { toggleItemCart } = inject("cart");
 const { order } = inject("order");
 </script>
