@@ -2,7 +2,9 @@
   <drawer-component v-if="drawerVisible" />
   <div class="w-4/5 mx-auto bg-white rounded-2xl shadow-xl mt-14">
     <header-component :totalPrice="totalPrice" />
-    <router-view></router-view>
+    <div class="p-11">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 

@@ -1,3 +1,3 @@
 <template>
-  <h1>Мои закладки</h1>
+  <my-title>Мои закладки</my-title>
 </template>

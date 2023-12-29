@@ -1,3 +1,3 @@
 <template>
-  <h1>Мои покупки</h1>
+  <my-title>Мои покупки</my-title>
 </template>

@@ -1,6 +1,6 @@
 <template>
-  <div class="flex justify-between align-center items-center px-11 mb-9">
-    <h2 class="text-3xl font-bold">Все кроссовки</h2>
+  <div class="flex justify-between align-center items-center mb-9">
+    <my-title>Все кросовки</my-title>
     <div class="flex">
       <my-select v-model="filters.sortBy" :sortOptions="sortOptions" />
       <my-input

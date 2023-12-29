@@ -1,5 +1,5 @@
 <template>
-  <div class="card-list px-11">
+  <div class="card-list">
     <div
       class="card-list__items grid grid-cols-4 gap-x-10 gap-y-12"
       v-auto-animate

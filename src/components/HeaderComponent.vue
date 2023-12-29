@@ -1,6 +1,6 @@
 <template>
   <header
-    class="header p-11 mb-11 border-b border-slate-300 flex justify-between items-center"
+    class="header p-11 border-b border-slate-300 flex justify-between items-center"
   >
     <router-link to="/">
       <div class="logo header__logo flex">
