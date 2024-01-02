@@ -106,25 +106,24 @@ const toggleFavorite = async (item) => {
   }
 };
 
-watch(filters, cardsFetch);
-watch(cartItems, () => {
+const filterItemsAdded = () => {
   cards.value = cards.value.map((card) => {
     return {
       ...card,
       isAdded: cartItems.value.some((item) => item.id === card.id),
     };
   });
+};
+
+watch(filters, cardsFetch);
+watch(cartItems, () => {
+  filterItemsAdded();
 });
 
 onMounted(async () => {
   await cardsFetch();
   await fetchFavorites();
 
-  cards.value = cards.value.map((card) => {
-    return {
-      ...card,
-      isAdded: cartItems.value.some((item) => item.id === card.id),
-    };
-  });
+  filterItemsAdded();
 });
 </script>

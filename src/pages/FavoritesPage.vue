@@ -13,6 +13,7 @@
     />
   </div>
   <info-component
+    v-else
     imageUrl="/emoji-1.png"
     title="Закладок нет :("
     text="Вы ничего не добавляли в закладки"
@@ -63,22 +64,21 @@ const deleteFavorite = async (item) => {
   }
 };
 
-watch(cartItems, () => {
+const filterItemsAdded = () => {
   favorites.value = favorites.value.map((card) => {
     return {
       ...card,
       isAdded: cartItems.value.some((item) => item.id === card.id),
     };
   });
+};
+
+watch(cartItems, () => {
+  filterItemsAdded();
 });
 
 onMounted(async () => {
   await fetchFavorites();
-  favorites.value = favorites.value.map((card) => {
-    return {
-      ...card,
-      isAdded: cartItems.value.some((item) => item.id === card.id),
-    };
-  });
+  filterItemsAdded();
 });
 </script>
