@@ -20,14 +20,17 @@
 </template>
 
 <script setup>
-import axios from "axios";
-import { ref, reactive, watch, onMounted, inject } from "vue";
+import { reactive, watch, onMounted, inject } from "vue";
 import debounce from "lodash.debounce";
 
 import CardList from "@/components/CardList";
+
+import { useCards } from "@/hooks/useCards";
+import { useFavorites } from "@/hooks/useFavorites";
+import { useToggleFavorites } from "@/hooks/useToggleFavorites";
+
 import { sortOptions } from "@/const";
 
-const cards = ref([]);
 const filters = reactive({
   sortBy: "",
   searchQuery: "",
@@ -39,71 +42,22 @@ const onChangeSearchInput = debounce((e) => {
   filters.searchQuery = e.target.value;
 }, 300);
 
-const cardsFetch = async () => {
-  try {
-    const params = {};
-    if (filters.searchQuery) {
-      params.title = `*${filters.searchQuery}*`;
-    }
-    if (filters.sortBy) {
-      params.sortBy = filters.sortBy;
-    }
-    const { data } = await axios.get(
-      "https://4384da2c13f50563.mokky.dev/products",
-      { params }
+const filterItemsFavorite = () => {
+  cards.value = cards.value.map((card) => {
+    const favorite = favorites.value.find(
+      (favorite) => favorite.id === card.id
     );
-    cards.value = data;
-  } catch (e) {
-    console.error(e.message);
-  }
-};
 
-const fetchFavorites = async () => {
-  try {
-    const { data: favorites } = await axios.get(
-      "https://4384da2c13f50563.mokky.dev/favorites"
-    );
-    cards.value = cards.value.map((card) => {
-      const favorite = favorites.find(
-        (favorite) => favorite.product_id === card.id
-      );
-
-      if (!favorite) {
-        return card;
-      }
-
-      return {
-        ...card,
-        isFavorite: true,
-        favoriteId: favorite.id,
-      };
-    });
-  } catch (e) {
-    console.error(e.message);
-  }
-};
-
-const toggleFavorite = async (item) => {
-  try {
-    if (!item.isFavorite) {
-      item.isFavorite = true;
-      const { data } = await axios.post(
-        "https://4384da2c13f50563.mokky.dev/favorites",
-        {
-          product_id: item.id,
-        }
-      );
-      item.favoriteId = data.id;
-    } else {
-      item.isFavorite = false;
-      await axios.delete(
-        `https://4384da2c13f50563.mokky.dev/favorites/${item.favoriteId}`
-      );
-      item.favoriteId = null;
+    if (!favorite) {
+      return card;
     }
-  } catch (e) {
-    console.error(e.message);
-  }
+
+    return {
+      ...card,
+      isFavorite: true,
+      favoriteId: favorite.id,
+    };
+  });
 };
 
 const filterItemsAdded = () => {
@@ -115,15 +69,17 @@ const filterItemsAdded = () => {
   });
 };
 
-watch(filters, cardsFetch);
+const { cards } = useCards(filters, filterItemsAdded);
+const { favorites } = useFavorites(filterItemsFavorite);
+const { toggleFavorite } = useToggleFavorites();
+
 watch(cartItems, () => {
   filterItemsAdded();
 });
 
-onMounted(async () => {
-  await cardsFetch();
-  await fetchFavorites();
+watch(favorites, filterItemsFavorite);
 
-  filterItemsAdded();
+onMounted(() => {
+  filterItemsFavorite();
 });
 </script>

@@ -21,48 +21,15 @@
 </template>
 
 <script setup>
-import axios from "axios";
-import { ref, onMounted, inject, watch } from "vue";
+import { inject, watch } from "vue";
 
 import CardList from "@/components/CardList";
 import InfoComponent from "@/components/InfoComponent";
 
+import { useFavorites } from "@/hooks/useFavorites";
+import { useDeleteFavorite } from "@/hooks/useDeleteFavorite";
+
 const { toggleItemCart, cartItems } = inject("cart");
-
-const favorites = ref([]);
-
-const fetchFavorites = async () => {
-  try {
-    const { data } = await axios.get(
-      "https://4384da2c13f50563.mokky.dev/favorites",
-      {
-        params: {
-          _relations: "products",
-        },
-      }
-    );
-    favorites.value = data.map((card) => ({
-      ...card.product,
-      favoriteId: card.id,
-      isFavorite: true,
-    }));
-  } catch (e) {
-    console.error(e.message);
-  }
-};
-
-const deleteFavorite = async (item) => {
-  try {
-    favorites.value = favorites.value.filter(
-      (favoriteItem) => favoriteItem.favoriteId !== item.favoriteId
-    );
-    await axios.delete(
-      `https://4384da2c13f50563.mokky.dev/favorites/${item.favoriteId}`
-    );
-  } catch (e) {
-    console.error(e.message);
-  }
-};
 
 const filterItemsAdded = () => {
   favorites.value = favorites.value.map((card) => {
@@ -73,12 +40,16 @@ const filterItemsAdded = () => {
   });
 };
 
-watch(cartItems, () => {
-  filterItemsAdded();
-});
+const favoritesDeleteItem = (item) => {
+  favorites.value = favorites.value.filter(
+    (favoriteItem) => favoriteItem.favoriteId !== item.favoriteId
+  );
+};
 
-onMounted(async () => {
-  await fetchFavorites();
+const { favorites } = useFavorites(filterItemsAdded);
+const { deleteFavorite } = useDeleteFavorite(favoritesDeleteItem);
+
+watch(cartItems, () => {
   filterItemsAdded();
 });
 </script>
