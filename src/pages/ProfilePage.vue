@@ -1,9 +1,17 @@
 <template>
-  <my-title class="mb-10">Мои покупки</my-title>
-  <card-list
-    :cards="orderItems"
-    @toggleFavorite="toggleFavorite"
-    @toggleItemCart="toggleItemCart"
+  <div v-if="orderItems.length > 0">
+    <my-title class="mb-10">Мои покупки</my-title>
+    <card-list
+      :cards="orderItems"
+      @toggleFavorite="toggleFavorite"
+      @toggleItemCart="toggleItemCart"
+    />
+  </div>
+  <info-component
+    v-else
+    imageUrl="/emoji-2.png"
+    title="У вас нет заказов"
+    text="Оформите хотя бы один заказ."
   />
 </template>
 
@@ -11,6 +19,7 @@
 import { inject, watch } from "vue";
 
 import cardList from "@/components/CardList";
+import infoComponent from "@/components/InfoComponent";
 
 import { useFavorites } from "@/hooks/useFavorites";
 import { useOrders } from "@/hooks/useOrders";
