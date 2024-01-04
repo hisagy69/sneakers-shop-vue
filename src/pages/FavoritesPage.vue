@@ -1,6 +1,6 @@
 <template>
   <div v-if="favorites.length">
-    <div class="flex align-center mb-8">
+    <div class="flex align-center mb-10">
       <router-link to="/" class="mr-5">
         <img src="/left.svg" alt="back" />
       </router-link>

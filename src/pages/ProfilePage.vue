@@ -1,5 +1,5 @@
 <template>
-  <my-title>Мои покупки</my-title>
+  <my-title class="mb-10">Мои покупки</my-title>
   <card-list
     :cards="orderItems"
     @toggleFavorite="toggleFavorite"
