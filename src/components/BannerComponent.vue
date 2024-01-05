@@ -10,12 +10,14 @@
       </swiper-slide>
     </Swiper>
     <button
+      v-if="swiper?.activeIndex > 0"
       @click="swiper.slidePrev()"
       class="button-prev absolute left-0 top-1/2 w-9 h-9 rounded-full z-10 bg-white flex items-center justify-center"
     >
       <img src="/arrow-left-button.svg" alt="arrow-right" />
     </button>
     <button
+      v-if="swiper?.activeIndex < bannerItems.length - 1"
       @click="swiper.slideNext()"
       class="button-next absolute right-0 top-1/2 w-9 h-9 rounded-full z-10 bg-white flex items-center justify-center"
     >
