@@ -1,11 +1,12 @@
 <template>
   <div class="relative mb-10">
     <Swiper @swiper="onSwiper">
-      <swiper-slide>
-        <banner-slide />
-      </swiper-slide>
-      <swiper-slide>
-        <banner-slide />
+      <swiper-slide v-for="item in bannerItems" :key="item.id">
+        <banner-slide
+          :imageUrl="item.imageUrl"
+          :logoUrl="item.logoUrl"
+          :product="item.product"
+        />
       </swiper-slide>
     </Swiper>
     <button
@@ -24,17 +25,39 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import "swiper/css";
 
 import BannerSlide from "@/components/BannerSlide.vue";
 
 const swiper = ref(null);
+const bannerItems = ref([]);
+
 const onSwiper = (instance) => {
-  console.log(instance);
   swiper.value = instance;
 };
+
+const bannersFetch = async () => {
+  try {
+    const { data } = await axios.get(
+      "https://4384da2c13f50563.mokky.dev/banners",
+      {
+        params: {
+          _relations: "products",
+        },
+      }
+    );
+    bannerItems.value = data;
+  } catch (e) {
+    console.error(e.message);
+  }
+};
+
+onMounted(async () => {
+  await bannersFetch();
+});
 </script>
 
 <style scoped>
