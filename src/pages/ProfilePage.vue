@@ -1,6 +1,11 @@
 <template>
   <div v-if="orderItems.length > 0">
-    <my-title class="mb-10">Мои покупки</my-title>
+    <div class="flex align-center mb-10">
+      <router-link to="/" class="mr-5">
+        <img src="/left.svg" alt="back" />
+      </router-link>
+      <my-title>Мои покупки</my-title>
+    </div>
     <card-list
       :cards="orderItems"
       @toggleFavorite="toggleFavorite"

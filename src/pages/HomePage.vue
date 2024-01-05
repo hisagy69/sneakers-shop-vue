@@ -12,6 +12,7 @@
       </my-input>
     </div>
   </div>
+  <banner-component></banner-component>
   <card-list
     :cards="cards"
     @toggleFavorite="toggleFavorite"
@@ -24,6 +25,7 @@ import { reactive, watch, onMounted, inject } from "vue";
 import debounce from "lodash.debounce";
 
 import CardList from "@/components/CardList";
+import BannerComponent from "@/components/BannerComponent";
 
 import { useCards } from "@/hooks/useCards";
 import { useFavorites } from "@/hooks/useFavorites";
