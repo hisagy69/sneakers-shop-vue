@@ -3,7 +3,8 @@
     <div>
       <img :src="logoUrl" alt="logo-banner" class="mt-4 ml-5 mb-8" />
       <p class="text-4xl font-bold ml-16 mb-3">
-        <span class="text-lime-400">Stan Smith</span>,<br />
+        <span class="text-lime-400">{{ title }}</span
+        >,<br />
         Forever!
       </p>
       <my-button
@@ -22,7 +23,12 @@
 <script setup>
 import { inject } from "vue";
 
-defineProps({ logoUrl: String, imageUrl: String, product: Object });
+defineProps({
+  logoUrl: String,
+  imageUrl: String,
+  title: String,
+  product: Object,
+});
 
 const { toggleItemCart } = inject("cart");
 </script>

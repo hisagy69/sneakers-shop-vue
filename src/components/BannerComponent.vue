@@ -6,6 +6,7 @@
           :imageUrl="item.imageUrl"
           :logoUrl="item.logoUrl"
           :product="item.product"
+          :title="item.title"
         />
       </swiper-slide>
     </Swiper>
