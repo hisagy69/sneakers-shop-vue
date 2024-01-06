@@ -1,12 +1,16 @@
 <template>
-  <div class="flex justify-between align-center items-center mb-8">
-    <my-title>Все кросовки</my-title>
-    <div class="flex">
-      <my-select v-model="filters.sortBy" :sortOptions="sortOptions" />
+  <div class="xl:flex justify-between align-center items-center mb-8">
+    <my-title class="mb-8 xl:mb-0">Все кросовки</my-title>
+    <div class="flex flex-col lg:flex-row">
+      <my-select
+        v-model="filters.sortBy"
+        :sortOptions="sortOptions"
+        class="order-2 lg:order-none"
+      />
       <my-input
         @input="onChangeSearchInput"
         placeholder="Поиск..."
-        class="card-list__search"
+        class="card-list__search order-1 lg:order-none mb-8 lg:mb-0"
       >
         <img src="/search.svg" alt="search" class="absolute left-4 top-5" />
       </my-input>

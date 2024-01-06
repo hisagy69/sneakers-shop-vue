@@ -1,6 +1,6 @@
 <template>
   <select
-    class="py-2 bx-3 border rounded-2xl outline-none bg-transparent mr-5"
+    class="w-fit py-2 bx-3 border rounded-2xl outline-none bg-transparent mr-5"
     :value="modelValue"
     @change="changeOptions"
   >
