@@ -1,6 +1,6 @@
 <template>
   <div
-    class="drawer w-screen h-screen fixed left-0 top-0 bg-black/70 z-10"
+    class="drawer w-screen h-screen fixed left-0 top-0 bg-black/70 z-20"
     @click.stop="toggleDrawer"
   >
     <drawer-cart />
