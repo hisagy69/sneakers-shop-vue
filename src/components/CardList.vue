@@ -2,13 +2,13 @@
   <div class="card-list">
     <div
       v-if="isLoadCards"
-      class="card-list__items grid grid-cols-4 gap-x-10 gap-y-12"
+      class="card-list__items grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-10 gap-y-12"
     >
       <card-skeleton v-for="key in 12" :key="key" />
     </div>
     <div
       v-else
-      class="card-list__items grid grid-cols-4 gap-x-10 gap-y-12"
+      class="card-list__items grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-10 gap-y-12"
       v-auto-animate
     >
       <card-item
