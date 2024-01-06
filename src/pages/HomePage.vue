@@ -15,6 +15,7 @@
   <banner-component></banner-component>
   <card-list
     :cards="cards"
+    :isLoadCards="isLoadCards"
     @toggleFavorite="toggleFavorite"
     @toggleItemCart="toggleItemCart"
   />
@@ -27,7 +28,7 @@ import debounce from "lodash.debounce";
 import CardList from "@/components/CardList";
 import BannerComponent from "@/components/BannerComponent";
 
-import { useCards } from "@/hooks/useCards";
+import { useCards, isLoadCards } from "@/hooks/useCards";
 import { useFavorites } from "@/hooks/useFavorites";
 import { useToggleFavorites } from "@/hooks/useToggleFavorites";
 

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="favorites.length">
+  <div v-if="favorites.length || isLoadFavorites">
     <div class="flex align-center mb-10">
       <router-link to="/" class="mr-5">
         <img src="/left.svg" alt="back" />
@@ -7,6 +7,7 @@
       <my-title>Мои закладки</my-title>
     </div>
     <card-list
+      :isLoadCards="isLoadFavorites"
       :cards="favorites"
       @toggleFavorite="deleteFavorite"
       @toggleItemCart="toggleItemCart"
@@ -26,7 +27,7 @@ import { inject, watch } from "vue";
 import CardList from "@/components/CardList";
 import InfoComponent from "@/components/InfoComponent";
 
-import { useFavorites } from "@/hooks/useFavorites";
+import { useFavorites, isLoadFavorites } from "@/hooks/useFavorites";
 import { useDeleteFavorite } from "@/hooks/useDeleteFavorite";
 
 const { toggleItemCart, cartItems } = inject("cart");

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="orderItems.length > 0">
+  <div v-if="orderItems.length > 0 || isLoadOrders">
     <div class="flex align-center mb-10">
       <router-link to="/" class="mr-5">
         <img src="/left.svg" alt="back" />
@@ -7,6 +7,7 @@
       <my-title>Мои покупки</my-title>
     </div>
     <card-list
+      :isLoadCards="isLoadOrders"
       :cards="orderItems"
       @toggleFavorite="toggleFavorite"
       @toggleItemCart="toggleItemCart"
@@ -27,7 +28,7 @@ import cardList from "@/components/CardList";
 import infoComponent from "@/components/InfoComponent";
 
 import { useFavorites } from "@/hooks/useFavorites";
-import { useOrders } from "@/hooks/useOrders";
+import { useOrders, isLoadOrders } from "@/hooks/useOrders";
 import { useToggleFavorites } from "@/hooks/useToggleFavorites";
 
 const { toggleItemCart, cartItems } = inject("cart");

@@ -1,6 +1,13 @@
 <template>
   <div class="card-list">
     <div
+      v-if="isLoadCards"
+      class="card-list__items grid grid-cols-4 gap-x-10 gap-y-12"
+    >
+      <card-skeleton v-for="key in 12" :key="key" />
+    </div>
+    <div
+      v-else
       class="card-list__items grid grid-cols-4 gap-x-10 gap-y-12"
       v-auto-animate
     >
@@ -22,9 +29,11 @@
 
 <script setup>
 import CardItem from "@/components/CardItem";
+import CardSkeleton from "@/components/CardSkeleton";
 
 defineProps({
   cards: Array,
+  isLoadCards: Boolean,
 });
 
 const emit = defineEmits(["toggleFavorite", "toggleItemCart"]);

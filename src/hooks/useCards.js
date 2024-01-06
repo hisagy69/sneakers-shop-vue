@@ -1,11 +1,13 @@
 import axios from "axios";
 import { ref, onMounted, watch } from "vue";
+export const isLoadCards = ref(false);
 
 export const useCards = (filters, callback) => {
   const cards = ref([]);
 
   const cardsFetch = async () => {
     try {
+      isLoadCards.value = true;
       const params = {};
       if (filters.searchQuery) {
         params.title = `*${filters.searchQuery}*`;
@@ -23,6 +25,8 @@ export const useCards = (filters, callback) => {
       }
     } catch (e) {
       console.error(e.message);
+    } finally {
+      isLoadCards.value = false;
     }
   };
 
