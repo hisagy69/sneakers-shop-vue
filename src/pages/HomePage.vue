@@ -1,7 +1,7 @@
 <template>
   <div class="xl:flex justify-between align-center items-center mb-8">
     <my-title class="mb-8 xl:mb-0">Все кросовки</my-title>
-    <div class="flex flex-col lg:flex-row">
+    <div class="flex flex-col lg:flex-row" v-if="!isLoadCards">
       <my-select
         v-model="filters.sortBy"
         :sortOptions="sortOptions"
