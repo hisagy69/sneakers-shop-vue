@@ -8,8 +8,7 @@
         class="order-2 lg:order-none"
       />
       <my-input
-        @input="onChangeSearchInput"
-        :value="filters.searchQuery"
+        v-model="filters.searchQuery"
         placeholder="Поиск..."
         class="card-list__search order-1 lg:order-none mb-8 lg:mb-0"
       >
@@ -28,7 +27,6 @@
 
 <script setup>
 import { reactive, watch, onMounted, inject } from "vue";
-import debounce from "lodash.debounce";
 
 import CardList from "@/components/CardList";
 import BannerComponent from "@/components/BannerComponent";
@@ -45,10 +43,6 @@ const filters = reactive({
 });
 
 const { cartItems, toggleItemCart } = inject("cart");
-
-const onChangeSearchInput = debounce((e) => {
-  filters.searchQuery = e.target.value;
-}, 500);
 
 const filterItemsFavorite = () => {
   cards.value = cards.value.map((card) => {
