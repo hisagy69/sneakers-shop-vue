@@ -8,7 +8,7 @@
     </div>
     <div
       v-else
-      class="card-list__items grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-10 gap-y-12"
+      class="card-list__items grid xl:grid-cols-4 lg:grid-cols-3 sm:grid-cols-2 gap-x-10 gap-y-12"
     >
       <card-item
         v-for="card in cards"

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative mb-10">
+  <div class="relative mb-10 md:block hidden">
     <Swiper @swiper="onSwiper">
       <swiper-slide v-for="item in bannerItems" :key="item.id">
         <banner-slide

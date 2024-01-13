@@ -5,3 +5,9 @@
 body {
   background-color: rgb(247, 254, 231);
 }
+
+@media screen and (max-width: 768px) {
+  body {
+    background-color: #fff;
+  }
+}
