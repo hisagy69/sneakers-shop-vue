@@ -9,6 +9,7 @@
       />
       <my-input
         @input="onChangeSearchInput"
+        :value="filters.searchQuery"
         placeholder="Поиск..."
         class="card-list__search order-1 lg:order-none mb-8 lg:mb-0"
       >
@@ -47,7 +48,7 @@ const { cartItems, toggleItemCart } = inject("cart");
 
 const onChangeSearchInput = debounce((e) => {
   filters.searchQuery = e.target.value;
-}, 300);
+}, 500);
 
 const filterItemsFavorite = () => {
   cards.value = cards.value.map((card) => {
