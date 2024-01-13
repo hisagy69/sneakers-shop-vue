@@ -9,7 +9,6 @@
     <div
       v-else
       class="card-list__items grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-x-10 gap-y-12"
-      v-auto-animate
     >
       <card-item
         v-for="card in cards"
